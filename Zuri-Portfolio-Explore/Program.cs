@@ -61,7 +61,7 @@ builder.Services.AddSingleton<IUriService>(o =>
     var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
     return new UriService(uri);
 });
-var connectionString = builder.Configuration.GetConnectionString("RemoteConnection");
+var connectionString = builder.Configuration.GetConnectionString("RemoteConnection2");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseNpgsql(connectionString));
@@ -103,8 +103,8 @@ app.UseCors("AllowAll");
 using (var scope = app.Services.CreateScope())
 {
     var dataContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    dataContext.Database.Migrate();
-    SeedDB.SeedSharedDb(dataContext, false);
+   // dataContext.Database.Migrate();
+  //  SeedDB.SeedSharedDb(dataContext, false);
 }
 
 app.UseHttpsRedirection();
